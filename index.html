@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript:Arrays</title>
+</head>
+<body>
+
+  <center><h1>JavaScript Array Operations</h1></center>
+
+ <hr>
+  <div class="section">
+    <h4>1. Sort Array</h4>
+    <input id="sortInput" placeholder="Enter array (e.g. 5,2,8,1)">
+    <button onclick="sortArray()">Sort</button>
+    <p id="sortResult"></p>
+  </div>
+
+  <div class="section">
+    <h4>2. Concatenate Arrays</h4>
+    <input id="concatInput1" placeholder="Enter first array (e.g. 1,2,3)">
+    <input id="concatInput2" placeholder="Enter second array (e.g. 4,5,6)">
+    <button onclick="concatArrays()">Concatenate</button>
+    <p id="concatResult"></p>
+  </div>
+
+ 
+  <div class="section">
+    <h4>3. Remove First Element</h4>
+    <input id="removeInput" placeholder="Enter array (e.g. 9,8,7)">
+    <button onclick="removeFirstElement()">Remove First</button>
+    <p id="removeResult"></p>
+  </div>
+
+  <script>
+    const sortArray = () => {
+  const arr = document.getElementById("sortInput").value.split(',').map(Number).sort((a, b) => a - b);
+  document.getElementById("sortResult").innerText = "Sorted Array: " + arr.join(', ');
+};
+
+const concatArrays = () => {
+  const combined = [...document.getElementById("concatInput1").value.split(',').map(Number),
+                    ...document.getElementById("concatInput2").value.split(',').map(Number)];
+  document.getElementById("concatResult").innerText = "Concatenated Array: " + combined.join(', ');
+};
+
+const removeFirstElement = () => {
+  const arr = document.getElementById("removeInput").value.split(',').map(Number);
+  arr.shift(); 
+  document.getElementById("removeResult").innerText = "Updated Array: " + arr.join(', ');
+};
+
+  </script>
+
+</body>
+</html>
