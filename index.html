@@ -1,55 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JavaScript:Arrays</title>
+    <title>JavaScript Array Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #0066cc;
+            text-align: center;
+        }
+        .operation {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #0055aa;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #eee;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 <body>
+    <h1>JavaScript Array Operations</h1>
+    
+    <div class="operation">
+        <h2>1. Sort Array</h2>
+        <input id="sortInput" type="text" placeholder="Example: 5, 2, 8, 1">
+        <button onclick="sortArray()">Sort</button>
+        <div id="sortResult" class="result"></div>
+    </div>
+    
+    <div class="operation">
+        <h2>2. Combine Arrays</h2>
+        <input id="concatInput1" type="text" placeholder="First array: 1, 2, 3">
+        <input id="concatInput2" type="text" placeholder="Second array: 4, 5, 6">
+        <button onclick="concatArrays()">Combine</button>
+        <div id="concatResult" class="result"></div>
+    </div>
+    
+    <div class="operation">
+        <h2>3. Remove First Item</h2>
+        <input id="removeInput" type="text" placeholder="Example: 9, 8, 7">
+        <button onclick="removeFirstElement()">Remove First</button>
+        <div id="removeResult" class="result"></div>
+    </div>
+    
+    <div class="operation">
+        <h2>4. Count Items</h2>
+        <input id="lengthInput" type="text" placeholder="Example: a, b, c, d">
+        <button onclick="getArrayLength()">Count Items</button>
+        <div id="lengthResult" class="result"></div>
+    </div>
 
-  <center><h1>JavaScript Array Operations</h1></center>
+    <script>
+        function sortArray() {
+            const input = document.getElementById("sortInput").value;
+            const arr = input.split(',').map(item => item.trim());
+            const isNumeric = arr.every(item => !isNaN(item));
+            
+            if (isNumeric) {
+                arr.sort((a, b) => a - b);
+            } else {
+                arr.sort();
+            }
+            
+            document.getElementById("sortResult").textContent = "Sorted: " + arr.join(', ');
+        }
 
- <hr>
-  <div class="section">
-    <h4>1. Sort Array</h4>
-    <input id="sortInput" placeholder="Enter array (e.g. 5,2,8,1)">
-    <button onclick="sortArray()">Sort</button>
-    <p id="sortResult"></p>
-  </div>
+        function concatArrays() {
+            const arr1 = document.getElementById("concatInput1").value.split(',').map(item => item.trim());
+            const arr2 = document.getElementById("concatInput2").value.split(',').map(item => item.trim());
+            const combined = arr1.concat(arr2);
+            document.getElementById("concatResult").textContent = "Combined: " + combined.join(', ');
+        }
 
-  <div class="section">
-    <h4>2. Concatenate Arrays</h4>
-    <input id="concatInput1" placeholder="Enter first array (e.g. 1,2,3)">
-    <input id="concatInput2" placeholder="Enter second array (e.g. 4,5,6)">
-    <button onclick="concatArrays()">Concatenate</button>
-    <p id="concatResult"></p>
-  </div>
+        function removeFirstElement() {
+            const arr = document.getElementById("removeInput").value.split(',').map(item => item.trim());
+            if (arr.length > 0) {
+                arr.shift();
+                document.getElementById("removeResult").textContent = "Modified: " + arr.join(', ');
+            } else {
+                document.getElementById("removeResult").textContent = "Array is empty!";
+            }
+        }
 
- 
-  <div class="section">
-    <h4>3. Remove First Element</h4>
-    <input id="removeInput" placeholder="Enter array (e.g. 9,8,7)">
-    <button onclick="removeFirstElement()">Remove First</button>
-    <p id="removeResult"></p>
-  </div>
-
-  <script>
-    const sortArray = () => {
-  const arr = document.getElementById("sortInput").value.split(',').map(Number).sort((a, b) => a - b);
-  document.getElementById("sortResult").innerText = "Sorted Array: " + arr.join(', ');
-};
-
-const concatArrays = () => {
-  const combined = [...document.getElementById("concatInput1").value.split(',').map(Number),
-                    ...document.getElementById("concatInput2").value.split(',').map(Number)];
-  document.getElementById("concatResult").innerText = "Concatenated Array: " + combined.join(', ');
-};
-
-const removeFirstElement = () => {
-  const arr = document.getElementById("removeInput").value.split(',').map(Number);
-  arr.shift(); 
-  document.getElementById("removeResult").innerText = "Updated Array: " + arr.join(', ');
-};
-
-  </script>
-
+        function getArrayLength() {
+            const arr = document.getElementById("lengthInput").value.split(',').map(item => item.trim());
+            document.getElementById("lengthResult").textContent = "Total items: " + arr.length;
+        }
+    </script>
 </body>
 </html>
